@@ -38,6 +38,7 @@
     src: execution_environment.yml.j2
     dest: "{{ ee_builder_dir | default(build_dir.path) }}/execution_environment.yml"
     mode: '0644'
+  when: not __execution_environment_definition.skip_generation | default(false) | bool
 
 - name: Run the Ansible Builder Program
   ansible.builtin.command: >

@@ -81,6 +81,7 @@ It takes variables from the following sections the list variables section.
 |`build_files`|dict|no|This section allows you to add any file to the build context directory. Reference [builder build_files documentation](https://ansible.readthedocs.io/projects/builder/en/stable/definition/#additional-build-files), examples and our examples for its structure.|
 |`images`|dict|no|This section is a dictionary that is used to define the base image to be used. Reference [builder images documentation](https://ansible.readthedocs.io/projects/builder/en/stable/definition/#images), examples and our examples for its structure. This will override 'ee_base_image'.|
 |`options`|dict|no|This section is a dictionary that contains keywords/options that can affect builder runtime functionality. Reference [builder options documentation](https://ansible.readthedocs.io/projects/builder/en/stable/definition/#options), examples and our examples for its structure.|
+|`skip_generation`|bool|false|Should the generation of execution_environment.yml be skipped and an already provided definition be used.|
 
 #### Additional List variables for Execution environment definition for Controller configuration
 

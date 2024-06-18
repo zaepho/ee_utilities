@@ -2,7 +2,7 @@
 # vars file for ee_builder
 __ee_stream_images:
   upstream:
-    base_image: quay.io/ansible/ansible-runner:latest
+    base_image: ghcr.io/ansible-community/community-ee-base:latest
   downstream:
     base_image: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
 

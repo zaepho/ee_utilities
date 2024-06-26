@@ -5,20 +5,17 @@
 # exclude_paths:
 #   - roles/master_role_example/
 exclude_paths:
-  - '.github/'
-  - 'roles/master_role_example/'
-  - 'changelogs/'
+  - .github/
+  - roles/master_role_example/
+  - changelogs/
 parseable: true
 use_default_rules: true
 # https://github.com/ansible/ansible-lint/issues/808
 # with verbosity set to 1, its dumping 'unknown file type messages'
 # verbosity: 1
 skip_list:
-  - meta-runtime
   - var-naming[no-role-prefix]
 kinds:
-  - playbooks: "**/examples/*.{yml,yaml}"
-  - tasks: "**/examples/tasks/*.yml"
   - vars: "**/examples/vars/*.yml"
   - vars: "**/examples/**/*.yml"
 ...

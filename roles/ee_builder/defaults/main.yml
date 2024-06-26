@@ -3,7 +3,6 @@
 ee_container_runtime: podman
 ee_version: 3
 
-
 ee_stream: "{% if ee_base_registry_username is defined %}downstream{% else %}upstream{% endif %}"
 
 # Image defaults
@@ -16,11 +15,10 @@ ansible_cfg_file: ansible.cfg
 
 # Default EE list
 ee_list: []
-
 # Major section Options
 ee_build_options: "{{ __ee_dnf_fix[ee_stream] }}"
 ee_build_arg_defaults:
-  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '-vv'
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: -vv
 
 # Controls
 ee_image_push: true

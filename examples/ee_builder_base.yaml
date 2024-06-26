@@ -2,12 +2,10 @@
 - name: Playbook to create custom EE
   hosts: localhost
   gather_facts: false
-  collections:
-    - infra.ee_utilities
   vars:
     # For controller configuration definition
     ee_builder_dir_clean: false
-    builder_dir: "."
+    builder_dir: .
     ee_update_base_images: false
     ee_reg_credential: Automation Hub Container Registry
     ee_base_image: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
@@ -27,9 +25,9 @@
             - python-requests
             - python-pyyaml
           python:
-            - pytz  # for schedule_rrule lookup plugin
-            - python-dateutil>=2.7.0  # schedule_rrule
-            - awxkit  # For import and export modules
+            - pytz # for schedule_rrule lookup plugin
+            - python-dateutil>=2.7.0 # schedule_rrule
+            - awxkit # For import and export modules
           galaxy:
             collections:
               - name: awx.awx

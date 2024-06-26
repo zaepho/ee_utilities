@@ -18,10 +18,10 @@
 
 - name: Copy files/folders to pull from for additional_build_files
   ansible.builtin.copy:
-    src: '{{ item }}'
-    dest: '{{ ee_builder_dir | default(build_dir.path) }}/{{ item }}'
-    mode: '0655'
-  loop: '{{ __execution_environment_definition.build_items }}'
+    src: "{{ item }}"
+    dest: "{{ ee_builder_dir | default(build_dir.path) }}/{{ item }}"
+    mode: "0655"
+  loop: "{{ __execution_environment_definition.build_items }}"
   when:
     - __execution_environment_definition.build_items is defined
     - __execution_environment_definition.build_items|length
@@ -30,30 +30,32 @@
   ansible.builtin.template:
     src: ansible.cfg.j2
     dest: "{{ ee_builder_dir | default(build_dir.path) }}/ansible.cfg"
-    mode: '0644'
+    mode: "0644"
   when: ee_pull_collections_from_hub
 
 - name: Create EE definition file
   ansible.builtin.template:
     src: execution_environment.yml.j2
     dest: "{{ ee_builder_dir | default(build_dir.path) }}/execution_environment.yml"
-    mode: '0644'
+    mode: "0644"
   when: not __execution_environment_definition.skip_generation | default(false) | bool
 
 - name: Run the Ansible Builder Program
   ansible.builtin.command: >
     ansible-builder build -f
       execution_environment.yml
-      -t {{ __execution_environment_definition.name | default( __execution_environment_definition.ee_name )}}{% if __execution_environment_definition.tag is defined %}:{{ __execution_environment_definition.tag }}{% endif %} --container-runtime={{ ee_container_runtime }}
+      -t {{ __execution_environment_definition.name | default(__execution_environment_definition.ee_name) }}{% if __execution_environment_definition.tag is defined
+    %}:{{ __execution_environment_definition.tag }}{% endif %} --container-runtime={{ ee_container_runtime }}
       {% if ee_prune_images %} --prune-images{% endif %}
       {% if ee_galaxy_keyring is defined %} --galaxy-keyring={{ ee_galaxy_keyring }}{% endif %}
-      {% if ee_galaxy_ignore_signature_status_code is defined %}{% for status_code in ee_galaxy_ignore_signature_status_code %} --galaxy-ignore-signature-status-code={{ status_code }}{% endfor %}{% endif %}
+      {% if ee_galaxy_ignore_signature_status_code is defined %}{% for status_code in ee_galaxy_ignore_signature_status_code %} --galaxy-ignore-signature-status-code={{
+    status_code }}{% endfor %}{% endif %}
       {% if galaxy_required_valid_signature_count is defined %} --galaxy-required-valid-signature-count={{ galaxy_required_valid_signature_count }}{% endif %}
       {% if ee_container_policy is defined %} --container-policy={{ ee_container_policy }}{% endif %}
       --verbosity {{ ee_verbosity | default(0) }}
   args:
     chdir: "{{ ee_builder_dir | default(build_dir.path) }}/"
-  changed_when: true   # these will always run and will always report "changed" otherwise
+  changed_when: true # these will always run and will always report "changed" otherwise
 
 - name: Push image to registry
   containers.podman.podman_image:

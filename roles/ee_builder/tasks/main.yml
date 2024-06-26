@@ -19,7 +19,7 @@
       ansible.builtin.template:
         src: ee_controller.yaml.j2
         dest: "{{ controller_ee.path }}/ee_controller.yaml"
-        mode: '0644'
+        mode: "0644"
 
     - name: Include templated variable
       ansible.builtin.include_vars:

@@ -9,7 +9,7 @@
         password: "{{ venv_migrate_registry_password }}"
 
     - name: Diff | Get pip list from Default EE
-      ansible.builtin.command: "podman run --rm -it {{ venv_migrate_default_ee_url }} bash -c \"/bin/pip3 freeze\""
+      ansible.builtin.command: podman run --rm -it {{ venv_migrate_default_ee_url }} bash -c "/bin/pip3 freeze"
       register: __venv_migrate_ee_pip_list_output
       changed_when: false
 

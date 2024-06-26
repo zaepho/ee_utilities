@@ -15,9 +15,9 @@ repos:
       - id: ansible-lint
         pass_filenames: false
         always_run: true
-        entry: "ansible-lint"
+        entry: ansible-lint
         args:
-          - "--profile=production"
+          - --profile=production
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.13.0
     hooks:

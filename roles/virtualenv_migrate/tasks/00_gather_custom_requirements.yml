@@ -2,7 +2,7 @@
 - name: Gather | Get the list of custom virtualenvs
   ansible.builtin.command: awx-manage list_custom_venvs
   register: __venv_migrate_custom_venvs
-  changed_when: false  # only gathering information
+  changed_when: false # only gathering information
 
 - name: Gather | Record all virtualenvs from AAP1.2 tower node
   ansible.builtin.set_fact:
@@ -20,14 +20,14 @@
     - not venv_migrate_show_diff_with_default
     - __venv_migrate_virtualenvs | length > 1
   register: __venv_migrate_freeze_results
-  changed_when: false  # only gathering information
+  changed_when: false # only gathering information
 
 - name: Gather pip freeze output from all venvs including the default venv
   ansible.builtin.command: "{{ item }}/bin/pip freeze"
   loop: "{{ __venv_migrate_virtualenvs }}"
   when: venv_migrate_show_diff_with_default | bool
   register: __venv_migrate_freeze_results_default
-  changed_when: false  # only gathering information
+  changed_when: false # only gathering information
 
 - name: Gather results from pip_freeze based on conditions
   ansible.builtin.set_fact:

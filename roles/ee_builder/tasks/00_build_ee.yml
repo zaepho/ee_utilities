@@ -70,7 +70,7 @@
     tag: "{{ __execution_environment_definition.tag | default(omit) }}"
     validate_certs: "{{ ee_validate_certs | default(omit) }}"
     push_args:
-      dest: "{{ ee_registry_dest }}"
+      dest: "{{ ee_registry_dest }}/{{ __execution_environment_definition.name }}{{ (':' + __execution_environment_definition.tag) if __execution_environment_definition.tag is defined }}"
       sign_by: "{{ ee_sign_by | default(omit) }}"
   when: ee_image_push
 
